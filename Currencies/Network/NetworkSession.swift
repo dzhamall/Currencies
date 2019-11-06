@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public protocol NetworkSession: class {
+public protocol NetworkSession {
     func loadData(from request: URLRequest, completion: @escaping (Data?, Error?) -> Void)
 }
 

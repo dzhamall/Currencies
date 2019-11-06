@@ -65,14 +65,13 @@ final class NetworkService: Network {
                 return
             }
             
-            guard let currency = data else {
+            guard let data = data else {
                 completion(.failure(" Неизвестная ошибка "))
                 return
             }
             do {
-                let json = try JSON(data: data!)
+                let json = try JSON(data: data)
                 let result = json["rates"]["\(endpoint.currency)"].stringValue
-                print("d")
                 completion(.success(result))
             } catch { fatalError() }
         }

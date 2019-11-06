@@ -11,7 +11,6 @@
 		66D3E3F12372C2B900B9B32C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E3F02372C2B900B9B32C /* ViewController.swift */; };
 		66D3E3F62372C2BF00B9B32C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66D3E3F52372C2BF00B9B32C /* Assets.xcassets */; };
 		66D3E3F92372C2BF00B9B32C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66D3E3F72372C2BF00B9B32C /* LaunchScreen.storyboard */; };
-		66D3E4042372C2BF00B9B32C /* CurrenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E4032372C2BF00B9B32C /* CurrenciesTests.swift */; };
 		66D3E4122372CEA100B9B32C /* RatesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E4112372CEA100B9B32C /* RatesTableView.swift */; };
 		66D3E4192372D1A700B9B32C /* MainTableViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E4182372D1A700B9B32C /* MainTableViewPresenter.swift */; };
 		66D3E41C2372D59900B9B32C /* RatesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E41B2372D59900B9B32C /* RatesCell.swift */; };
@@ -29,6 +28,9 @@
 		66D3E44123733DF900B9B32C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E44023733DF900B9B32C /* Endpoint.swift */; };
 		66D3E44323733E7400B9B32C /* CurrencyEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E44223733E7400B9B32C /* CurrencyEndpoint.swift */; };
 		66D3E44523733F2F00B9B32C /* CurrencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E44423733F2F00B9B32C /* CurrencyRepository.swift */; };
+		66D3E44723735C1900B9B32C /* NetworkServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E44623735C1900B9B32C /* NetworkServiceTest.swift */; };
+		66D3E44B23735C3A00B9B32C /* EndpointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E44A23735C3A00B9B32C /* EndpointMock.swift */; };
+		66D3E44D23735CC900B9B32C /* NetworkSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E44C23735CC900B9B32C /* NetworkSessionMock.swift */; };
 		C8DF8B3415C430916D71D631 /* Pods_CurrenciesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A733C000D097CDD265D857C /* Pods_CurrenciesTests.framework */; };
 		E32DF171A98EE9E84EF08251 /* Pods_Currencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D6E7B7C038695402A78E8A /* Pods_Currencies.framework */; };
 /* End PBXBuildFile section */
@@ -52,7 +54,6 @@
 		66D3E3F82372C2BF00B9B32C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66D3E3FA2372C2BF00B9B32C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66D3E3FF2372C2BF00B9B32C /* CurrenciesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrenciesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		66D3E4032372C2BF00B9B32C /* CurrenciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesTests.swift; sourceTree = "<group>"; };
 		66D3E4052372C2BF00B9B32C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66D3E4112372CEA100B9B32C /* RatesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesTableView.swift; sourceTree = "<group>"; };
 		66D3E4182372D1A700B9B32C /* MainTableViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewPresenter.swift; sourceTree = "<group>"; };
@@ -71,6 +72,9 @@
 		66D3E44023733DF900B9B32C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		66D3E44223733E7400B9B32C /* CurrencyEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyEndpoint.swift; sourceTree = "<group>"; };
 		66D3E44423733F2F00B9B32C /* CurrencyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRepository.swift; sourceTree = "<group>"; };
+		66D3E44623735C1900B9B32C /* NetworkServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTest.swift; sourceTree = "<group>"; };
+		66D3E44A23735C3A00B9B32C /* EndpointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointMock.swift; sourceTree = "<group>"; };
+		66D3E44C23735CC900B9B32C /* NetworkSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionMock.swift; sourceTree = "<group>"; };
 		68F568851DD0F2667F2DE35B /* Pods-CurrenciesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrenciesTests.release.xcconfig"; path = "Target Support Files/Pods-CurrenciesTests/Pods-CurrenciesTests.release.xcconfig"; sourceTree = "<group>"; };
 		8BAAC88BC251A2EB1E2A96B9 /* Pods-Currencies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currencies.release.xcconfig"; path = "Target Support Files/Pods-Currencies/Pods-Currencies.release.xcconfig"; sourceTree = "<group>"; };
 		AEBA4FAE1700DF34ED939F79 /* Pods-CurrenciesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrenciesTests.debug.xcconfig"; path = "Target Support Files/Pods-CurrenciesTests/Pods-CurrenciesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,7 +151,7 @@
 		66D3E4022372C2BF00B9B32C /* CurrenciesTests */ = {
 			isa = PBXGroup;
 			children = (
-				66D3E4032372C2BF00B9B32C /* CurrenciesTests.swift */,
+				66D3E44823735C1F00B9B32C /* Network */,
 				66D3E4052372C2BF00B9B32C /* Info.plist */,
 			);
 			path = CurrenciesTests;
@@ -319,6 +323,24 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		66D3E44823735C1F00B9B32C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				66D3E44923735C2A00B9B32C /* Mocks */,
+				66D3E44623735C1900B9B32C /* NetworkServiceTest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		66D3E44923735C2A00B9B32C /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				66D3E44A23735C3A00B9B32C /* EndpointMock.swift */,
+				66D3E44C23735CC900B9B32C /* NetworkSessionMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		78D25AA9E343A4A8EA7B273E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +406,7 @@
 					};
 					66D3E3FE2372C2BF00B9B32C = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 						TestTargetID = 66D3E3E82372C2B900B9B32C;
 					};
 				};
@@ -521,7 +544,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66D3E4042372C2BF00B9B32C /* CurrenciesTests.swift in Sources */,
+				66D3E44B23735C3A00B9B32C /* EndpointMock.swift in Sources */,
+				66D3E44D23735CC900B9B32C /* NetworkSessionMock.swift in Sources */,
+				66D3E44723735C1900B9B32C /* NetworkServiceTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +736,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CXDT86GZ7C;
 				INFOPLIST_FILE = CurrenciesTests/Info.plist;
@@ -722,6 +748,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = unostraniero.CurrenciesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Currencies.app/Currencies";
@@ -734,6 +761,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CXDT86GZ7C;
 				INFOPLIST_FILE = CurrenciesTests/Info.plist;
