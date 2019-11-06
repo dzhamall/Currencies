@@ -8,20 +8,20 @@
 
 import Foundation
 
-protocol GetCurrency {
-    func execute(completion: @escaping (Result<Currency,Error>) -> Void)
+protocol GetCurrencyUseCase: class {
+    func execute(from: String, to: String, completion: @escaping (Result<Currency,Error>) -> Void)
 }
 
-final class DefaultGetCurrency{
+final class DefaultGetCurrencyUseCase{
     private let currencyRepository: CurrencyRepository
     init(currencyRepository: CurrencyRepository) {
         self.currencyRepository = currencyRepository
     }
 }
 
-extension DefaultGetCurrency: GetCurrency {
-    func execute(completion: @escaping (Result<Currency, Error>) -> Void) {
-        currencyRepository.getCurrency { result in
+extension DefaultGetCurrencyUseCase: GetCurrencyUseCase {
+    func execute(from: String, to: String, completion: @escaping (Result<Currency, Error>) -> Void) {
+        currencyRepository.getCurrency(from: from, to: to) { result in
             switch result {
             case .success:
                 completion(result)

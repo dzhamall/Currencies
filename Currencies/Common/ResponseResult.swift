@@ -1,5 +1,5 @@
 //
-//  CurrencyRepository.swift
+//  ResponseResult.swift
 //  Currencies
 //
 //  Created by unostraniero on 06.11.2019.
@@ -8,6 +8,9 @@
 
 import Foundation
 
-protocol CurrencyRepository {
-    func getCurrency(completion: @escaping (Result<Currency,Error>) -> Void)
+public enum ResponseResult {
+    case success(String)
+    case failure(String)
 }
+
+extension String: Error { }

@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct Currency {
+public struct Currency {
     var convert: String
 }
