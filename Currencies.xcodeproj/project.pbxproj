@@ -242,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				66D3E42E237339D200B9B32C /* Entites */,
-				66D3E42F237339E500B9B32C /* Currency.swift */,
 				66D3E42D237339A100B9B32C /* UseCases */,
 				66D3E43123733AA900B9B32C /* Interfaces */,
 			);
@@ -260,6 +259,7 @@
 		66D3E42E237339D200B9B32C /* Entites */ = {
 			isa = PBXGroup;
 			children = (
+				66D3E42F237339E500B9B32C /* Currency.swift */,
 			);
 			path = Entites;
 			sourceTree = "<group>";
