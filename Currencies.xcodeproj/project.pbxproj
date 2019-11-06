@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,9 @@
 		66D3E4242372F52400B9B32C /* CurrenciesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E4232372F52400B9B32C /* CurrenciesFactory.swift */; };
 		66D3E4272372FA3000B9B32C /* FirstCurrencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E4262372FA3000B9B32C /* FirstCurrencyCoordinator.swift */; };
 		66D3E4292372FAF200B9B32C /* SecondCurrencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E4282372FAF200B9B32C /* SecondCurrencyCoordinator.swift */; };
+		66D3E42C2373399700B9B32C /* GetCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E42B2373399700B9B32C /* GetCurrency.swift */; };
+		66D3E430237339E500B9B32C /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E42F237339E500B9B32C /* Currency.swift */; };
+		66D3E43423733ACB00B9B32C /* CurrencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E43323733ACB00B9B32C /* CurrencyRepository.swift */; };
 		C8DF8B3415C430916D71D631 /* Pods_CurrenciesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A733C000D097CDD265D857C /* Pods_CurrenciesTests.framework */; };
 		E32DF171A98EE9E84EF08251 /* Pods_Currencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D6E7B7C038695402A78E8A /* Pods_Currencies.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +56,9 @@
 		66D3E4232372F52400B9B32C /* CurrenciesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesFactory.swift; sourceTree = "<group>"; };
 		66D3E4262372FA3000B9B32C /* FirstCurrencyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCurrencyCoordinator.swift; sourceTree = "<group>"; };
 		66D3E4282372FAF200B9B32C /* SecondCurrencyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCurrencyCoordinator.swift; sourceTree = "<group>"; };
+		66D3E42B2373399700B9B32C /* GetCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrency.swift; sourceTree = "<group>"; };
+		66D3E42F237339E500B9B32C /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		66D3E43323733ACB00B9B32C /* CurrencyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRepository.swift; sourceTree = "<group>"; };
 		68F568851DD0F2667F2DE35B /* Pods-CurrenciesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrenciesTests.release.xcconfig"; path = "Target Support Files/Pods-CurrenciesTests/Pods-CurrenciesTests.release.xcconfig"; sourceTree = "<group>"; };
 		8BAAC88BC251A2EB1E2A96B9 /* Pods-Currencies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currencies.release.xcconfig"; path = "Target Support Files/Pods-Currencies/Pods-Currencies.release.xcconfig"; sourceTree = "<group>"; };
 		AEBA4FAE1700DF34ED939F79 /* Pods-CurrenciesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrenciesTests.debug.xcconfig"; path = "Target Support Files/Pods-CurrenciesTests/Pods-CurrenciesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,7 +94,6 @@
 				AEBA4FAE1700DF34ED939F79 /* Pods-CurrenciesTests.debug.xcconfig */,
 				68F568851DD0F2667F2DE35B /* Pods-CurrenciesTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -116,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				66D3E40E2372CBB400B9B32C /* Application */,
+				66D3E42A237338A500B9B32C /* Domain */,
 				66D3E4102372CD6900B9B32C /* Presentation */,
 				66D3E40F2372CBC100B9B32C /* Resources */,
 				66D3E3FA2372C2BF00B9B32C /* Info.plist */,
@@ -211,6 +217,48 @@
 				66D3E4232372F52400B9B32C /* CurrenciesFactory.swift */,
 			);
 			path = Factory;
+			sourceTree = "<group>";
+		};
+		66D3E42A237338A500B9B32C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				66D3E42E237339D200B9B32C /* Entites */,
+				66D3E42F237339E500B9B32C /* Currency.swift */,
+				66D3E42D237339A100B9B32C /* UseCases */,
+				66D3E43123733AA900B9B32C /* Interfaces */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		66D3E42D237339A100B9B32C /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				66D3E42B2373399700B9B32C /* GetCurrency.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		66D3E42E237339D200B9B32C /* Entites */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entites;
+			sourceTree = "<group>";
+		};
+		66D3E43123733AA900B9B32C /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				66D3E43223733AB800B9B32C /* Repository */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		66D3E43223733AB800B9B32C /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				66D3E43323733ACB00B9B32C /* CurrencyRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		78D25AA9E343A4A8EA7B273E /* Frameworks */ = {
@@ -393,10 +441,13 @@
 				66D3E4122372CEA100B9B32C /* RatesTableView.swift in Sources */,
 				66D3E4192372D1A700B9B32C /* MainTableViewPresenter.swift in Sources */,
 				66D3E4222372F4C500B9B32C /* RatesCoordinator.swift in Sources */,
+				66D3E43423733ACB00B9B32C /* CurrencyRepository.swift in Sources */,
 				66D3E41C2372D59900B9B32C /* RatesCell.swift in Sources */,
 				66D3E4272372FA3000B9B32C /* FirstCurrencyCoordinator.swift in Sources */,
+				66D3E430237339E500B9B32C /* Currency.swift in Sources */,
 				66D3E4242372F52400B9B32C /* CurrenciesFactory.swift in Sources */,
 				66D3E3F12372C2B900B9B32C /* ViewController.swift in Sources */,
+				66D3E42C2373399700B9B32C /* GetCurrency.swift in Sources */,
 				66D3E3ED2372C2B900B9B32C /* AppDelegate.swift in Sources */,
 				66D3E4292372FAF200B9B32C /* SecondCurrencyCoordinator.swift in Sources */,
 			);
