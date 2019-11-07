@@ -72,6 +72,14 @@ final class NetworkService: Network {
             do {
                 let json = try JSON(data: data)
                 let result = json["rates"]["\(endpoint.currency)"].stringValue
+                
+                guard result != "" else {
+                    let js = json["error"]["code"]
+                    let error = self.errorHandling(code: Int(js.description)!)
+                    completion(.failure(error))
+                    return
+                }
+    
                 completion(.success(result))
             } catch { fatalError() }
         }
@@ -81,5 +89,26 @@ final class NetworkService: Network {
 public class Connectivity {
     class func isConnectedToInternet() -> Bool {
         return NetworkReachabilityManager()!.isReachable
+    }
+}
+
+
+//MARK: - Api Error Handling
+extension NetworkService {
+    private func errorHandling(code: Int) -> String {
+        switch code {
+        case 105:
+            return " При данной подписке, базовая валюта только EUR"
+        case 404:
+            return "The requested resource does not exist."
+        case 104:
+            return "The maximum allowed API amount of monthly API requests has been reached."
+        case 101:
+            return "No API Key was specified or an invalid API Key was specified."
+        case 103:
+            return "The requested API endpoint does not exist."
+        default:
+            return " ошибка на сервере "
+        }
     }
 }

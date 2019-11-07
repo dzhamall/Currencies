@@ -33,10 +33,27 @@ extension RatesCoordinator: Coordinator {
 
 //MARK: - Delegate
 extension RatesCoordinator: RatesDelegate {
+    func setError(message: String) {
+        self.reportAnErrorInAlert(message: message)
+    }
+
     func showNextView(useCase: GetCurrencyUseCase) {
         let firstCurrencyView = NextCurrencyCoordinator(navigationController: navigationController,
                                                          ratesCoordinator: self)
         self.firstCurrencyView = firstCurrencyView
         self.firstCurrencyView?.start()
     }
+}
+
+//MARK: - Error Protocol
+extension RatesCoordinator: ErrorProtocol {
+    func reportAnErrorInAlert(message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.navigationController.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
 }

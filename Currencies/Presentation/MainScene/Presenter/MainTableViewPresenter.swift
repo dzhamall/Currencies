@@ -12,6 +12,7 @@ var currArray: [RatesModel] = []
 
 protocol RatesDelegate: class {
     func showNextView(useCase: GetCurrencyUseCase)
+    func setError(message: String)
 }
 
 final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType {
@@ -27,10 +28,11 @@ final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType 
     
     func updateAndShow(from: String?, to: String?) {
         guard let fromCurr = from, let toCurr = to else { return }
-        currencyUseCase.execute(from: fromCurr, to: toCurr) { (result) in
+        currencyUseCase.execute(from: fromCurr, to: toCurr) { [weak self] (result) in
+            guard let strongSelf = self else { return }
             switch result {
             case .success(let rates):
-                self.currentView?.setData(data: RatesType(
+                strongSelf.currentView?.setData(data: RatesType(
                     setCurrrency: [RatesModel(
                         currency: fromCurr,
                         from: currenciesDictionary["\(fromCurr)"]!,
@@ -39,7 +41,7 @@ final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType 
                     )
                 )
             case .failure(let error):
-                break
+                strongSelf.delegate?.setError(message: error as! String)
             }
         }
     }

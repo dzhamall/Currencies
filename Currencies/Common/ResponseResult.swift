@@ -14,3 +14,7 @@ public enum ResponseResult {
 }
 
 extension String: Error { }
+
+public protocol ErrorProtocol {
+    func reportAnErrorInAlert(message: String)
+}

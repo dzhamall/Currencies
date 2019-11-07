@@ -26,6 +26,5 @@ final class DefaultNetworkSession: NetworkSession {
                 }
                 completion(response.data, nil)
             })
-        
-    }
+        }
 }
