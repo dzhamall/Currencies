@@ -17,9 +17,14 @@ protocol RatesDelegate: class {
 
 final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType {
     
-    private weak var currentView: View?
+    private var currentView: View?
     private weak var delegate: RatesDelegate?
     private var currencyUseCase: GetCurrencyUseCase
+    private var items: [RatesModel] = [] {
+        didSet {
+            self.update()
+        }
+    }
         
     init(delegate: RatesDelegate, currencyUseCase: GetCurrencyUseCase) {
         self.delegate = delegate
@@ -42,34 +47,38 @@ final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType 
                 )
             case .failure(let error):
                 strongSelf.currentView?.setData(data: nil)
-                DispatchQueue.main.async {
-                    strongSelf.currentView?.setData(data: nil)
-                }
                 strongSelf.delegate?.setError(message: error as! String)
             }
         }
     }
     
     func convert() {
-        self.currentView?.updateData(data:
-            RatesType(setCurrrency: nil,
-                      refreshHandling: { [weak self] data in
-                        guard let strongSelf = self else { return }
-                        var allRates: [String] = [ ]
-                        data.forEach { (model) in
-                            allRates.append(model.rates)}
-                        
-                        strongSelf.currencyUseCase.execute(from: "", to: allRates.first!) { (result) in
-                            switch result {
-                            case .success(let currency):
-                                break
-                            case .failure(let error):
-                                break
-                            }
-                        }
-            })
-        )
+        self.currentView?.updateData(data: RatesType(refreshHandling: { [weak self] data in
+            guard let strongSelf = self else { return }
+            data.map { return strongSelf.fetchUpdate(model: $0 )}
+        }))
+    }
     
+    private func fetchUpdate(model: RatesModel) {
+        let rates = currencDictionaryBackward["\(model.fromRates)"]
+        guard let currency = rates else { return  }
+        self.currencyUseCase.execute(from: model.currency, to: currency) { [weak self] (result) in
+            switch result {
+            case .success(let rates):
+                let elem = RatesModel(currency: model.currency,
+                                         from: model.from,
+                                         rates: rates,
+                                         fromRates: model.fromRates)
+                self?.items.append(elem)
+            case .failure(let error):
+                self?.delegate?.setError(message: error as! String)
+            }
+        }
+    }
+    
+    private func update() {
+        guard !items.isEmpty else { return }
+        self.currentView?.updateData(data: RatesType(setCurrrency: items, refreshHandling: nil))
     }
     
 }

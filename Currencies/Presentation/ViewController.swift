@@ -78,13 +78,3 @@ final class ViewController<View: CurrentView,Presenter : PresenterProtocol>: UIV
     }
 
 }
-
-extension ViewController: ErrorProtocol {
-    func reportAnErrorInAlert(message: String) {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            self.navigationController?.present(alert, animated: true, completion: nil)
-        }
-    }
-}

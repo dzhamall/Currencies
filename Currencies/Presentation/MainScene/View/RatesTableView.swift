@@ -96,14 +96,19 @@ extension RatesTableView: ViewProtocol {
     func setData(data: RatesType?) {
         guard let data = data else {
             items = currArray
+            self.refresher.endRefreshing()
             return
         }
-        currArray.insert(contentsOf: data.setCurrrency!, at: 0)
+        guard let currency = data.setCurrrency else { return }
+        currArray.insert(contentsOf: currency, at: 0)
         items.insert(contentsOf: currArray, at: 0)
     }
     
     func updateData(data: RatesType) {
         refreshHandling = data.refreshHandling
+        guard let currencies = data.setCurrrency else { return }
+        items = currencies
+        currArray = currencies
     }
     
 }
