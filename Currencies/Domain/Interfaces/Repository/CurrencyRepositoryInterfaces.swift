@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CurrencyRepository {
-    func getCurrency(from: String, to: String, completion: @escaping (Result<Currency, Error>) -> Void)
+    func getCurrency(from: String, to: String, completion: @escaping (Result<String, Error>) -> Void)
 }

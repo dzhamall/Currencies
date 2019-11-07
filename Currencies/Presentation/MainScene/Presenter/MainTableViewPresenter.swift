@@ -8,8 +8,10 @@
 
 import Foundation
 
+var currArray: [RatesModel] = []
+
 protocol RatesDelegate: class {
-    func showNextView()
+    func showNextView(useCase: GetCurrencyUseCase)
 }
 
 final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType {
@@ -23,15 +25,34 @@ final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType 
         self.currencyUseCase = currencyUseCase
     }
     
-    func convert() {
-        currencyUseCase.execute(from: "EUR", to: "RUB") { (result) in
+    func updateAndShow(from: String?, to: String?) {
+        guard let fromCurr = from, let toCurr = to else { return }
+        currencyUseCase.execute(from: fromCurr, to: toCurr) { (result) in
             switch result {
-            case .success(let currency):
-                fatalError()
+            case .success(let rates):
+                self.currentView?.setData(data: RatesType(
+                    setCurrrency: [RatesModel(
+                        currency: fromCurr,
+                        from: currenciesDictionary["\(fromCurr)"]!,
+                        rates: "\(rates)",
+                        fromRates: currenciesDictionary["\(toCurr)"]!)]
+                    )
+                )
             case .failure(let error):
-                fatalError()
+                break
             }
         }
+    }
+    
+    func convert() {
+//        currencyUseCase.execute(from: "EUR", to: "RUB") { (result) in
+//            switch result {
+//            case .success(let currency):
+//                break
+//            case .failure(let error):
+//                break
+//            }
+//        }
     }
     
 }
@@ -49,10 +70,10 @@ extension RatesPresenter: PresenterProtocol {
     }
     
     func actionHadling(view: View) {
-        self.delegate?.showNextView()
+        self.delegate?.showNextView(useCase: self.currencyUseCase)
     }
 }
 
 struct RatesType {
-    var addCell: Bool
+    var setCurrrency: [RatesModel]
 }

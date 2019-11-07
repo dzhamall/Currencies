@@ -11,8 +11,17 @@ import UIKit
 final class RatesTableView: UIView {
     
     private var tableView: UITableView = .init()
-    var titleNavigationItem = " Rates "
+    private var refresher: UIRefreshControl!
+
+    private var items: [RatesModel] = .init() {
+        didSet {
+            reload()
+            self.refresher.endRefreshing()
+        }
+    }
+    
     var navigationItems: NavigationItems = .addButton
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,6 +30,12 @@ final class RatesTableView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RatesCell.self, forCellReuseIdentifier: RatesCell.identifier)
+        tableView.tableFooterView = UIView()
+        
+        self.refresher = UIRefreshControl()
+        self.tableView.alwaysBounceVertical = true
+        self.refresher.tintColor = UIColor.darkGray
+//        self.refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
         
         addSubviews()
         setupLayout()
@@ -28,6 +43,12 @@ final class RatesTableView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func reload() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
 }
@@ -40,7 +61,7 @@ extension RatesTableView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -50,6 +71,10 @@ extension RatesTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RatesCell.identifier,
                                                  for: indexPath) as! RatesCell
+        cell.currencyLabel.text = items[indexPath.row].currency
+        cell.fromCurrency.text = items[indexPath.row].from
+        cell.ratesLabel.text = items[indexPath.row].rates
+        cell.fromRates.text = items[indexPath.row].fromRates
 
         return cell
     }
@@ -62,7 +87,8 @@ extension RatesTableView: ViewProtocol {
     typealias DataType = RatesType
     
     func setData(data: RatesType) {
-        
+        currArray.insert(contentsOf: data.setCurrrency, at: 0)
+        items.insert(contentsOf: currArray, at: 0)
     }
     
 }
@@ -71,6 +97,7 @@ extension RatesTableView {
     
     private func addSubviews() {
         self.addSubview(tableView)
+        self.tableView.addSubview(refresher)
     }
     
     private func setupLayout() {
