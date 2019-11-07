@@ -16,11 +16,15 @@ final class CurrenciesFactory {
         return service
     }()
     
-    static func makeRatesView(delegate: RatesDelegate
+    //MARK: - Rates View
+    static func makeRatesView(delegate: RatesDelegate,
+                              from: String?,
+                              to: String?
     ) -> ViewController<RatesTableView,RatesPresenter<RatesTableView>> {
         let presenter = RatesPresenter<RatesTableView>(delegate: delegate,
                                                        currencyUseCase: makeCurrencyUseCase())
-        return ViewController(currentView: RatesTableView(), presenter: presenter)
+        presenter.updateAndShow(from: from, to: to)
+        return ViewController(currentView: RatesTableView(), presenter: presenter, titleName: "Rates")
     }
     
     private static func makeCurrencyUseCase() -> GetCurrencyUseCase {
@@ -31,5 +35,31 @@ final class CurrenciesFactory {
         return DefaultCurrencyRepository(networkService: networkService)
     }
     
+    //MARK: - First Currency View
+    static func makeFirstCurrencyView(titleName: String,
+                                      delegate: CurrencyPresenterDelegate,
+                                      useCase: GetCurrencyUseCase?
+    ) -> ViewController<NextCurrencyTableView, CurrencyPresenter<NextCurrencyTableView>> {
+        
+        let presenter = CurrencyPresenter<NextCurrencyTableView>(delegate: delegate,
+                                                                 router: .firstScene,
+                                                                 fromCurrency: nil)
+        return ViewController(currentView:NextCurrencyTableView(),
+                              presenter: presenter, titleName: titleName)
+        
+    }
     
+    static func makeSecondCurrencyView(titleName: String,
+                                       delegate: CurrencyPresenterDelegate,
+                                       fromCurrency: String
+    ) -> ViewController<NextCurrencyTableView, CurrencyPresenter<NextCurrencyTableView>> {
+        
+        let presenter = CurrencyPresenter<NextCurrencyTableView>(delegate: delegate,
+                                                                 router: .secondScene,
+                                                                 fromCurrency: fromCurrency)
+        return ViewController(currentView:NextCurrencyTableView(),
+                              presenter: presenter,
+                              titleName: titleName)
+        
+    }
 }

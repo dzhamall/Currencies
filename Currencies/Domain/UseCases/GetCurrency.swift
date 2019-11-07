@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol GetCurrencyUseCase: class {
-    func execute(from: String, to: String, completion: @escaping (Result<Currency,Error>) -> Void)
+public protocol GetCurrencyUseCase: class {
+    func execute(from: String, to: String, completion: @escaping (Result<String,Error>) -> Void)
 }
 
 final class DefaultGetCurrencyUseCase{
@@ -20,7 +20,7 @@ final class DefaultGetCurrencyUseCase{
 }
 
 extension DefaultGetCurrencyUseCase: GetCurrencyUseCase {
-    func execute(from: String, to: String, completion: @escaping (Result<Currency, Error>) -> Void) {
+    func execute(from: String, to: String, completion: @escaping (Result<String, Error>) -> Void) {
         currencyRepository.getCurrency(from: from, to: to) { result in
             switch result {
             case .success:

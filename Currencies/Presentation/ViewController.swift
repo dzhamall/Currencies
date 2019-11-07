@@ -10,13 +10,13 @@ import UIKit
 
 public enum NavigationItems {
     case addButton
+    case clear
 }
 
 typealias CurrentView = UIView & ViewProtocol
 
 public protocol ViewProtocol: class {
     associatedtype DataType
-    var titleNavigationItem: String { get }
     var navigationItems: NavigationItems { get }
     func setData(data: DataType)
 }
@@ -33,10 +33,11 @@ final class ViewController<View: CurrentView,Presenter : PresenterProtocol>: UIV
     private var currentView: View
     private var presenter: Presenter
 
-    init(currentView: View, presenter: Presenter) {
+    init(currentView: View, presenter: Presenter, titleName: String) {
         self.currentView = currentView
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+        navigationItem.title = titleName
     }
     
     override func loadView() {
@@ -48,9 +49,10 @@ final class ViewController<View: CurrentView,Presenter : PresenterProtocol>: UIV
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                target: self,
                                                                action: #selector(action(_:)))
+        default:
+            break
         }
         
-        navigationItem.title = currentView.titleNavigationItem
         presenter.attachView(view: currentView)
     }
     

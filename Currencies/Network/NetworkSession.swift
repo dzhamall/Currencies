@@ -26,10 +26,6 @@ final class DefaultNetworkSession: NetworkSession {
                 }
                 completion(response.data, nil)
             })
-            .response { (response) in
-                guard let error = response.error else { return }
-                completion(nil, error)
-        }
         
     }
 }
