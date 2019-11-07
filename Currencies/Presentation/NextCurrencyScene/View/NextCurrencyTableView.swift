@@ -60,20 +60,17 @@ extension NextCurrencyTableView: UITableViewDelegate {
 
 //MARK: - View Protocol
 extension NextCurrencyTableView: ViewProtocol {
-    
     typealias DataType = CurrencyType
     
-    func setData(data: DataType) {
-        showNextCurrencyScene = data.showNextCurrencyScene
-    }
-    
-    var titleNavigationItem: String {
-        return " First currency"
+    func setData(data: DataType?) {
+        showNextCurrencyScene = data?.showNextCurrencyScene
     }
     
     var navigationItems: NavigationItems {
         return .clear
     }
+    
+    func updateData(data: CurrencyType) { }
 }
 
 //MARK: - Setup Layout

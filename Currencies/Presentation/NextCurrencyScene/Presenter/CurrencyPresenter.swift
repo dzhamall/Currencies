@@ -44,7 +44,6 @@ final class CurrencyPresenter<View: ViewProtocol> where View.DataType == Currenc
         case .secondScene:
             self.currentView?.setData(data: CurrencyType(showNextCurrencyScene:{[weak self] (currency) in
                 guard let strongSelf = self else { return }
-        
                 strongSelf.delegate?.showRatesScene(from: strongSelf.fromCurrency!, to: currency)
             }))
         }
