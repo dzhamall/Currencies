@@ -18,7 +18,8 @@ typealias CurrentView = UIView & ViewProtocol
 public protocol ViewProtocol: class {
     associatedtype DataType
     var navigationItems: NavigationItems { get }
-    func setData(data: DataType)
+    func setData(data: DataType?)
+    func updateData(data: DataType)
 }
 
 public protocol PresenterProtocol: class {
@@ -71,6 +72,19 @@ final class ViewController<View: CurrentView,Presenter : PresenterProtocol>: UIV
     @objc func action(_ sender: UIButton) {
         presenter.actionHadling(view: currentView)
     }
+    
+    func showError() {
+        
+    }
 
 }
 
+extension ViewController: ErrorProtocol {
+    func reportAnErrorInAlert(message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.navigationController?.present(alert, animated: true, completion: nil)
+        }
+    }
+}

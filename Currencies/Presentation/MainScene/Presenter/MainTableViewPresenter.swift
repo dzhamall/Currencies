@@ -11,7 +11,7 @@ import Foundation
 var currArray: [RatesModel] = []
 
 protocol RatesDelegate: class {
-    func showNextView(useCase: GetCurrencyUseCase)
+    func showNextView()
     func setError(message: String)
 }
 
@@ -41,20 +41,35 @@ final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType 
                     )
                 )
             case .failure(let error):
+                strongSelf.currentView?.setData(data: nil)
+                DispatchQueue.main.async {
+                    strongSelf.currentView?.setData(data: nil)
+                }
                 strongSelf.delegate?.setError(message: error as! String)
             }
         }
     }
     
     func convert() {
-//        currencyUseCase.execute(from: "EUR", to: "RUB") { (result) in
-//            switch result {
-//            case .success(let currency):
-//                break
-//            case .failure(let error):
-//                break
-//            }
-//        }
+        self.currentView?.updateData(data:
+            RatesType(setCurrrency: nil,
+                      refreshHandling: { [weak self] data in
+                        guard let strongSelf = self else { return }
+                        var allRates: [String] = [ ]
+                        data.forEach { (model) in
+                            allRates.append(model.rates)}
+                        
+                        strongSelf.currencyUseCase.execute(from: "", to: allRates.first!) { (result) in
+                            switch result {
+                            case .success(let currency):
+                                break
+                            case .failure(let error):
+                                break
+                            }
+                        }
+            })
+        )
+    
     }
     
 }
@@ -72,10 +87,11 @@ extension RatesPresenter: PresenterProtocol {
     }
     
     func actionHadling(view: View) {
-        self.delegate?.showNextView(useCase: self.currencyUseCase)
+        self.delegate?.showNextView()
     }
 }
 
 struct RatesType {
-    var setCurrrency: [RatesModel]
+    var setCurrrency: [RatesModel]?
+    var refreshHandling: (([RatesModel]) -> Void)?
 }

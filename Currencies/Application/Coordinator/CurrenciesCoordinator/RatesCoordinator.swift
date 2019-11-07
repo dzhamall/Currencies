@@ -17,7 +17,7 @@ final class RatesCoordinator {
         self.navigationController = navigationController
     }
     
-    func updateAndShow(from: String, to: String) {
+    func updateAndShow(from: String?, to: String?) {
         let scene = CurrenciesFactory.makeRatesView(delegate: self, from: from, to: to)
         self.navigationController.setViewControllers([scene], animated: true)
     }
@@ -37,7 +37,7 @@ extension RatesCoordinator: RatesDelegate {
         self.reportAnErrorInAlert(message: message)
     }
 
-    func showNextView(useCase: GetCurrencyUseCase) {
+    func showNextView() {
         let firstCurrencyView = NextCurrencyCoordinator(navigationController: navigationController,
                                                          ratesCoordinator: self)
         self.firstCurrencyView = firstCurrencyView
@@ -54,6 +54,4 @@ extension RatesCoordinator: ErrorProtocol {
             self.navigationController.present(alert, animated: true, completion: nil)
         }
     }
-    
-    
 }

@@ -79,7 +79,6 @@ final class NetworkService: Network {
                     completion(.failure(error))
                     return
                 }
-    
                 completion(.success(result))
             } catch { fatalError() }
         }

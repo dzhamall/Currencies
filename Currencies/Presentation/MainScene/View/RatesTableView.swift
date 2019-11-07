@@ -12,8 +12,9 @@ final class RatesTableView: UIView {
     
     private var tableView: UITableView = .init()
     private var refresher: UIRefreshControl!
+    private var refreshHandling: (([RatesModel]) -> Void)?
 
-    private var items: [RatesModel] = .init() {
+    private var items: [RatesModel?] = .init() {
         didSet {
             reload()
             self.refresher.endRefreshing()
@@ -22,7 +23,6 @@ final class RatesTableView: UIView {
     
     var navigationItems: NavigationItems = .addButton
 
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -35,7 +35,7 @@ final class RatesTableView: UIView {
         self.refresher = UIRefreshControl()
         self.tableView.alwaysBounceVertical = true
         self.refresher.tintColor = UIColor.darkGray
-//        self.refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        self.refresher.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
         addSubviews()
         setupLayout()
@@ -51,6 +51,13 @@ final class RatesTableView: UIView {
         }
     }
     
+    @objc func refreshData() {
+        guard items.count > 0 else {
+            return
+        }
+        refreshHandling?(items as! [RatesModel])
+    }
+
 }
 
 //MARK: - Table View Implementation
@@ -71,10 +78,10 @@ extension RatesTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RatesCell.identifier,
                                                  for: indexPath) as! RatesCell
-        cell.currencyLabel.text = items[indexPath.row].currency
-        cell.fromCurrency.text = items[indexPath.row].from
-        cell.ratesLabel.text = items[indexPath.row].rates
-        cell.fromRates.text = items[indexPath.row].fromRates
+        cell.currencyLabel.text = items[indexPath.row]?.currency
+        cell.fromCurrency.text = items[indexPath.row]?.from
+        cell.ratesLabel.text = items[indexPath.row]?.rates
+        cell.fromRates.text = items[indexPath.row]?.fromRates
 
         return cell
     }
@@ -86,9 +93,17 @@ extension RatesTableView: UITableViewDelegate { }
 extension RatesTableView: ViewProtocol {
     typealias DataType = RatesType
     
-    func setData(data: RatesType) {
-        currArray.insert(contentsOf: data.setCurrrency, at: 0)
+    func setData(data: RatesType?) {
+        guard let data = data else {
+            items = currArray
+            return
+        }
+        currArray.insert(contentsOf: data.setCurrrency!, at: 0)
         items.insert(contentsOf: currArray, at: 0)
+    }
+    
+    func updateData(data: RatesType) {
+        refreshHandling = data.refreshHandling
     }
     
 }
@@ -110,3 +125,5 @@ extension RatesTableView {
     }
     
 }
+
+
