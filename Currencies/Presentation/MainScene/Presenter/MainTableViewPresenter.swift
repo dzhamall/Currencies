@@ -9,6 +9,7 @@
 import Foundation
 
 var currArray: [RatesModel] = []
+var fetchFromStorage = true
 
 protocol RatesDelegate: class {
     func showNextView()
@@ -37,14 +38,19 @@ final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType 
             guard let strongSelf = self else { return }
             switch result {
             case .success(let rates):
-                strongSelf.currentView?.setData(data: RatesType(
-                    setCurrrency: [RatesModel(
-                        currency: fromCurr,
-                        from: currenciesDictionary["\(fromCurr)"]!,
-                        rates: "\(rates)",
-                        fromRates: currenciesDictionary["\(toCurr)"]!)]
-                    )
-                )
+                let rates = [RatesModel(
+                    currency: fromCurr,
+                    from: currenciesDictionary["\(fromCurr)"]!,
+                    rates: "\(rates)",
+                    fromRates: currenciesDictionary["\(toCurr)"]!)]
+                
+                strongSelf.currentView?.setData(data: RatesType( setCurrrency: rates))
+                
+                strongSelf.currencyUseCase.saveCurrency(currency: rates.map{ Currency(
+                    currency: $0.currency,
+                    from: $0.from,
+                    rates: $0.rates, fromRates: $0.fromRates)})
+                
             case .failure(let error):
                 strongSelf.currentView?.setData(data: nil)
                 strongSelf.delegate?.setError(message: error as! String)
@@ -55,8 +61,16 @@ final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType 
     func convert() {
         self.currentView?.updateData(data: RatesType(refreshHandling: { [weak self] data in
             guard let strongSelf = self else { return }
-            data.map { return strongSelf.fetchUpdate(model: $0 )}
-        }))
+            data.map { return strongSelf.fetchUpdate(model: $0 ) }
+            }, remove: { [weak self] item in
+                guard let strongSelf = self else { return }
+                strongSelf.currencyUseCase.remove(currency: Currency(currency: item.currency,
+                                                                     from: item.from,
+                                                                     rates: item.rates,
+                                                                     fromRates: item.fromRates))
+        })
+        
+        )
     }
     
     private func fetchUpdate(model: RatesModel) {
@@ -81,6 +95,23 @@ final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType 
         self.currentView?.updateData(data: RatesType(setCurrrency: items, refreshHandling: nil))
     }
     
+    func setDataFromStorage() {
+        guard fetchFromStorage else { return }
+        fetchFromStorage = false
+        let currencies = currencyUseCase.fetch()
+        let result = currencies.map { RatesModel(currency: $0.currency,
+                                                 from: $0.from,
+                                                 rates: $0.rates,
+                                                 fromRates: $0.fromRates)
+        }
+        guard !result.isEmpty else {
+            self.currentView?.setData(data: RatesType(setCurrrency: nil, refreshHandling: nil))
+            return
+        }
+        self.currentView?.setData(data: RatesType(setCurrrency: result, refreshHandling: nil))
+        fetchFromStorage = false 
+    }
+    
 }
 
 extension RatesPresenter: PresenterProtocol {
@@ -98,9 +129,14 @@ extension RatesPresenter: PresenterProtocol {
     func actionHadling(view: View) {
         self.delegate?.showNextView()
     }
+    
+    func set() {
+        setDataFromStorage()
+    }
 }
 
 struct RatesType {
     var setCurrrency: [RatesModel]?
     var refreshHandling: (([RatesModel]) -> Void)?
+    var remove: ((RatesModel) -> Void)?
 }

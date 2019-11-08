@@ -47,18 +47,18 @@ extension CurrencyCell {
         currencyLabel.translatesAutoresizingMaskIntoConstraints = false
         fromCurrency.translatesAutoresizingMaskIntoConstraints = false
         
-        currencyLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor,
+        currencyLabel.leftAnchor.constraint(equalTo: self.leftAnchor,
                                             constant: +12).isActive = true
-        currencyLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,
+        currencyLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,
                                               constant: 12).isActive = true
-        currencyLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,
+        currencyLabel.topAnchor.constraint(equalTo: self.topAnchor,
                                            constant: 12).isActive = true
         
         fromCurrency.leftAnchor.constraint(equalTo: currencyLabel.rightAnchor,
                                            constant: +12).isActive = true
-        fromCurrency.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,
+        fromCurrency.bottomAnchor.constraint(equalTo: self.bottomAnchor,
                                               constant: 12).isActive = true
-        fromCurrency.topAnchor.constraint(equalTo: self.contentView.topAnchor,
+        fromCurrency.topAnchor.constraint(equalTo: self.topAnchor,
                                            constant: 12).isActive = true
     }
 }

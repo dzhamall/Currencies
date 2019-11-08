@@ -16,6 +16,8 @@ final class CurrenciesFactory {
         return service
     }()
     
+    private static var currenciesStorage: CurrenciesStorage = CurrenciesStorage()
+    
     //MARK: - Rates View
     static func makeRatesView(delegate: RatesDelegate,
                               from: String?,
@@ -32,7 +34,8 @@ final class CurrenciesFactory {
     }
     
     private static func makeCurrencyRepository() -> CurrencyRepository {
-        return DefaultCurrencyRepository(networkService: networkService)
+        return DefaultCurrencyRepository(networkService: networkService,
+                                         currenciesStorage: currenciesStorage)
     }
     
     //MARK: - First Currency View

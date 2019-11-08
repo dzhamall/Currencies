@@ -9,9 +9,11 @@
 import Foundation
 
 final class DefaultCurrencyRepository {
-    let service: NetworkService
-    init(networkService: NetworkService) {
+    private let service: NetworkService
+    private let currenciesStorage: CurrenciesStorage
+    init(networkService: NetworkService, currenciesStorage: CurrenciesStorage) {
         self.service = networkService
+        self.currenciesStorage = currenciesStorage
     }
 }
 
@@ -28,5 +30,17 @@ extension DefaultCurrencyRepository: CurrencyRepository {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func saveCurrency(currency: [Currency]) {
+        currenciesStorage.createObject(currency: currency)
+    }
+    
+    func getCurrencyFromTheBase() -> [Currency] {
+        return currenciesStorage.getCurrencies()
+    }
+    
+    func remove(currency: Currency) {
+        currenciesStorage.remove(currency: currency)
     }
 }

@@ -9,6 +9,7 @@ target 'Currencies' do
 	
 	pod 'Alamofire', '~> 4.0'
 	pod 'SwiftyJSON', '~> 4.0'
+	pod 'RealmSwift'
 
   target 'CurrenciesTests' do
     inherit! :search_paths

@@ -26,6 +26,7 @@ public protocol PresenterProtocol: class {
     associatedtype ViewType
     func actionHadling(view: ViewType)
     func attachView(view: ViewType)
+    func set()
     func detachView()
 }
 
@@ -44,6 +45,7 @@ final class ViewController<View: CurrentView,Presenter : PresenterProtocol>: UIV
     override func loadView() {
         self.view = currentView
         presenter.attachView(view: currentView)
+        presenter.set()
         
         switch currentView.navigationItems {
         case .addButton:
@@ -53,8 +55,6 @@ final class ViewController<View: CurrentView,Presenter : PresenterProtocol>: UIV
         default:
             break
         }
-        
-        presenter.attachView(view: currentView)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

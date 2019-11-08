@@ -9,5 +9,8 @@
 import Foundation
 
 public struct Currency {
-    var convert: String
+    var currency: String
+    var from: String
+    var rates: String
+    var fromRates: String
 }

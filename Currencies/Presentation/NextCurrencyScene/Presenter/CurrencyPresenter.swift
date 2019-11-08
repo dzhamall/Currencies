@@ -52,6 +52,10 @@ final class CurrencyPresenter<View: ViewProtocol> where View.DataType == Currenc
 }
 
 extension CurrencyPresenter: PresenterProtocol {
+    func set() {
+        
+    }
+    
     typealias ViewType = View
     
     func actionHadling(view: View) {}
