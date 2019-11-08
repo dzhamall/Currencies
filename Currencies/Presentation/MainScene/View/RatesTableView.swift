@@ -68,17 +68,24 @@ extension RatesTableView: UITableViewDataSource {
         1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int
+    ) -> Int {
         return items.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
         return 100
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RatesCell.identifier,
-                                                 for: indexPath) as! RatesCell
+                                                 for: indexPath
+            ) as! RatesCell
         cell.currencyLabel.text = items[indexPath.row]?.currency
         cell.fromCurrency.text = items[indexPath.row]?.from
         cell.ratesLabel.text = items[indexPath.row]?.rates

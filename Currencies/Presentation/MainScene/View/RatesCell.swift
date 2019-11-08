@@ -67,26 +67,38 @@ extension RatesCell {
         
         currencyLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
-        currencyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12).isActive = true
-        currencyLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12).isActive = true
+        currencyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                               constant: 12).isActive = true
+        currencyLabel.topAnchor.constraint(equalTo: self.topAnchor,
+                                           constant: 12).isActive = true
         
         fromCurrency.heightAnchor.constraint(equalToConstant: 23).isActive = true
         
-        fromCurrency.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12).isActive = true
+        fromCurrency.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                              constant: 12).isActive = true
         fromCurrency.leadingAnchor.constraint(equalTo: currencyLabel.leadingAnchor,
                                               constant: 0).isActive = true
-        fromCurrency.topAnchor.constraint(equalTo: currencyLabel.bottomAnchor, constant: 12).isActive = true
+        fromCurrency.topAnchor.constraint(equalTo: currencyLabel.bottomAnchor,
+                                          constant: 12).isActive = true
                 
-        ratesLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12).isActive = true
-        ratesLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12).isActive = true
-        ratesLabel.topAnchor.constraint(equalTo: currencyLabel.topAnchor, constant: 0).isActive = true
+        ratesLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                             constant: -12).isActive = true
+        ratesLabel.topAnchor.constraint(equalTo: self.topAnchor,
+                                        constant: 12).isActive = true
+        ratesLabel.topAnchor.constraint(equalTo: currencyLabel.topAnchor,
+                                        constant: 0).isActive = true
         
         fromRates.heightAnchor.constraint(equalToConstant: 23).isActive = true
         
-        fromRates.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12).isActive = true
-        fromRates.trailingAnchor.constraint(equalTo: ratesLabel.trailingAnchor, constant: 0).isActive = true
-        fromRates.topAnchor.constraint(equalTo: ratesLabel.bottomAnchor, constant: 12).isActive = true
-        fromRates.topAnchor.constraint(equalTo: fromCurrency.topAnchor, constant: 0).isActive = true
-        fromCurrency.bottomAnchor.constraint(equalTo: fromCurrency.bottomAnchor, constant: 0).isActive = true
+        fromRates.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                            constant: -12).isActive = true
+        fromRates.trailingAnchor.constraint(equalTo: ratesLabel.trailingAnchor,
+                                            constant: 0).isActive = true
+        fromRates.topAnchor.constraint(equalTo: ratesLabel.bottomAnchor,
+                                       constant: 12).isActive = true
+        fromRates.topAnchor.constraint(equalTo: fromCurrency.topAnchor,
+                                       constant: 0).isActive = true
+        fromCurrency.bottomAnchor.constraint(equalTo: fromCurrency.bottomAnchor,
+                                             constant: 0).isActive = true
     }
 }

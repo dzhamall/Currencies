@@ -91,7 +91,6 @@ public class Connectivity {
     }
 }
 
-
 //MARK: - Api Error Handling
 extension NetworkService {
     private func errorHandling(code: Int) -> String {

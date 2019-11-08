@@ -49,9 +49,11 @@ final class ViewController<View: CurrentView,Presenter : PresenterProtocol>: UIV
         
         switch currentView.navigationItems {
         case .addButton:
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                               target: self,
-                                                               action: #selector(action(_:)))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .add,
+                target: self,
+                action: #selector(action(_:))
+            )
         default:
             break
         }

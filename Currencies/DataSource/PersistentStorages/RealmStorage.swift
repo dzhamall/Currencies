@@ -55,7 +55,6 @@ class CurrenciesStorage {
         let object = realm.objects(CurrencyObject.self)
         try! realm.write {
             realm.delete(object.filter("fromRates == \"\(currency.fromRates)\""))
-    
         }
     }
 }

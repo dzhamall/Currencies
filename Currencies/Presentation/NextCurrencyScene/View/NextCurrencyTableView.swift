@@ -35,15 +35,21 @@ extension NextCurrencyTableView: UITableViewDataSource {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int
+    ) -> Int {
         return currenciesDictionary.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
         return 50
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyCell.identifier,
                                                  for: indexPath) as! CurrencyCell
         cell.currencyLabel.text = Array(currenciesDictionary)[indexPath.row].key
@@ -53,7 +59,9 @@ extension NextCurrencyTableView: UITableViewDataSource {
 }
 
 extension NextCurrencyTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath
+    ) {
         showNextCurrencyScene?(Array(currenciesDictionary)[indexPath.row].key)
     }
 }

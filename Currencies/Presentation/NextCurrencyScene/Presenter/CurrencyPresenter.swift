@@ -38,13 +38,13 @@ final class CurrencyPresenter<View: ViewProtocol> where View.DataType == Currenc
         switch router {
         case .firstScene:
             self.currentView?.setData(data: CurrencyType(showNextCurrencyScene: {[weak self] currency in
-                guard let strongSelf = self else { return }
-                strongSelf.delegate?.showNextCurrencyScene(from: currency)
+                guard let self = self else { return }
+                self.delegate?.showNextCurrencyScene(from: currency)
             }))
         case .secondScene:
             self.currentView?.setData(data: CurrencyType(showNextCurrencyScene:{[weak self] (currency) in
-                guard let strongSelf = self else { return }
-                strongSelf.delegate?.showRatesScene(from: strongSelf.fromCurrency!, to: currency)
+                guard let self = self else { return }
+                self.delegate?.showRatesScene(from: self.fromCurrency!, to: currency)
             }))
         }
         
@@ -52,12 +52,10 @@ final class CurrencyPresenter<View: ViewProtocol> where View.DataType == Currenc
 }
 
 extension CurrencyPresenter: PresenterProtocol {
-    func set() {
-        
-    }
-    
     typealias ViewType = View
     
+    func set() {}
+
     func actionHadling(view: View) {}
     
     func attachView(view: View) {
@@ -66,7 +64,7 @@ extension CurrencyPresenter: PresenterProtocol {
     }
     
     func detachView() {
-//        self.currentView = nil
+        self.currentView = nil
     }
     
 }
