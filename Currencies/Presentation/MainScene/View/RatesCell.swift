@@ -27,6 +27,7 @@ final class RatesCell: UITableViewCell {
     var ratesLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
+        label.textAlignment = .center
         label.font = UIFont(name:"HelveticaNeue-Bold", size: 22.0)
         return label
     }()
@@ -63,43 +64,29 @@ extension RatesCell {
         ratesLabel.translatesAutoresizingMaskIntoConstraints = false
         fromRates.translatesAutoresizingMaskIntoConstraints = false
         
-        currencyLabel.heightAnchor.constraint(equalToConstant: 26.5).isActive = true
+        
         currencyLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
-        currencyLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,
-                                           constant: 12).isActive = true
-        currencyLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor,
-                                            constant: +12).isActive = true
-        currencyLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,
-                                              constant: -43).isActive = true
+        currencyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12).isActive = true
+        currencyLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12).isActive = true
         
         fromCurrency.heightAnchor.constraint(equalToConstant: 23).isActive = true
-        fromCurrency.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                          constant: 45).isActive = true
-        fromCurrency.leftAnchor.constraint(equalTo: self.contentView.leftAnchor,
-                                           constant: 12).isActive = true
-        fromCurrency.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,
-                                             constant: -12).isActive = true
         
-        ratesLabel.heightAnchor.constraint(equalToConstant: 26.5).isActive = true
-        ratesLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        fromCurrency.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12).isActive = true
+        fromCurrency.leadingAnchor.constraint(equalTo: currencyLabel.leadingAnchor,
+                                              constant: 0).isActive = true
+        fromCurrency.topAnchor.constraint(equalTo: currencyLabel.bottomAnchor, constant: 12).isActive = true
+                
+        ratesLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12).isActive = true
+        ratesLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12).isActive = true
+        ratesLabel.topAnchor.constraint(equalTo: currencyLabel.topAnchor, constant: 0).isActive = true
         
-        ratesLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,
-                                        constant: 8).isActive = true
-        ratesLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor,
-                                          constant: +5).isActive = true
-        ratesLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor,
-                                         constant: contentView.frame.width - ratesLabel.frame.width).isActive = true
+        fromRates.heightAnchor.constraint(equalToConstant: 23).isActive = true
         
-        fromRates.heightAnchor.constraint(equalToConstant: 26.5).isActive = true
-        fromRates.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,
-                                          constant: -12).isActive = true
-        fromRates.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                          constant: 45).isActive = true
-        fromRates.rightAnchor.constraint(equalTo: self.ratesLabel.rightAnchor,
-                                         constant: -3).isActive = true
-        fromRates.leftAnchor.constraint(equalTo: self.fromCurrency.rightAnchor,
-                                        constant: 0).isActive = true
-        
+        fromRates.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12).isActive = true
+        fromRates.trailingAnchor.constraint(equalTo: ratesLabel.trailingAnchor, constant: 0).isActive = true
+        fromRates.topAnchor.constraint(equalTo: ratesLabel.bottomAnchor, constant: 12).isActive = true
+        fromRates.topAnchor.constraint(equalTo: fromCurrency.topAnchor, constant: 0).isActive = true
+        fromCurrency.bottomAnchor.constraint(equalTo: fromCurrency.bottomAnchor, constant: 0).isActive = true
     }
 }
