@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66025FE923754581000B00E6 /* RealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66025FE823754581000B00E6 /* RealmStorage.swift */; };
 		6669043223740678000B6EE3 /* RatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669043123740678000B6EE3 /* RatesModel.swift */; };
 		66D3E3ED2372C2B900B9B32C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E3EC2372C2B900B9B32C /* AppDelegate.swift */; };
 		66D3E3F12372C2B900B9B32C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3E3F02372C2B900B9B32C /* ViewController.swift */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		2A733C000D097CDD265D857C /* Pods_CurrenciesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrenciesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66025FE823754581000B00E6 /* RealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorage.swift; sourceTree = "<group>"; };
 		6669043123740678000B6EE3 /* RatesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesModel.swift; sourceTree = "<group>"; };
 		66D3E3E92372C2B900B9B32C /* Currencies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Currencies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66D3E3EC2372C2B900B9B32C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,14 @@
 				68F568851DD0F2667F2DE35B /* Pods-CurrenciesTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		66025FE723754532000B00E6 /* PersistentStorages */ = {
+			isa = PBXGroup;
+			children = (
+				66025FE823754581000B00E6 /* RealmStorage.swift */,
+			);
+			path = PersistentStorages;
 			sourceTree = "<group>";
 		};
 		66D3E3E02372C2B900B9B32C = {
@@ -294,6 +304,7 @@
 			children = (
 				66D3E43723733C7600B9B32C /* Endpoints */,
 				66D3E43623733C3D00B9B32C /* Repository */,
+				66025FE723754532000B00E6 /* PersistentStorages */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -565,6 +576,7 @@
 				66D3E43C23733CB000B9B32C /* NetworkSession.swift in Sources */,
 				6669043223740678000B6EE3 /* RatesModel.swift in Sources */,
 				66D3E4532373634800B9B32C /* CurrencyCell.swift in Sources */,
+				66025FE923754581000B00E6 /* RealmStorage.swift in Sources */,
 				66D3E43A23733C9F00B9B32C /* NetworkService.swift in Sources */,
 				66D3E4272372FA3000B9B32C /* NextCurrencyCoordinator.swift in Sources */,
 				66D3E430237339E500B9B32C /* Currency.swift in Sources */,
