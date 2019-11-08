@@ -13,6 +13,7 @@ final class RatesTableView: UIView {
     private var tableView: UITableView = .init()
     private var refresher: UIRefreshControl!
     private var refreshHandling: (([RatesModel]) -> Void)?
+    private var remove: ((RatesModel) -> Void)?
 
     private var items: [RatesModel?] = .init() {
         didSet {
@@ -87,7 +88,17 @@ extension RatesTableView: UITableViewDataSource {
     }
 }
 
-extension RatesTableView: UITableViewDelegate { }
+extension RatesTableView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath
+    ) {
+        guard editingStyle == .delete else { return }
+        remove?(items[indexPath.row]!)
+        items.remove(at: indexPath.row)
+        currArray.remove(at: indexPath.row)
+    }
+}
     
 //MARK: - View Protocol
 extension RatesTableView: ViewProtocol {
@@ -105,6 +116,7 @@ extension RatesTableView: ViewProtocol {
     }
     
     func updateData(data: RatesType) {
+        remove = data.remove
         refreshHandling = data.refreshHandling
         guard let currencies = data.setCurrrency else { return }
         items = currencies

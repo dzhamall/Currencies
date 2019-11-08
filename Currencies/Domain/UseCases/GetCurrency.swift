@@ -39,7 +39,7 @@ extension DefaultGetCurrencyUseCase: GetCurrencyUseCase {
     }
     
     func remove(currency: Currency) {
-        
+        currencyRepository.remove(currency: currency)
     }
     
     func saveCurrency(currency: [Currency]) {

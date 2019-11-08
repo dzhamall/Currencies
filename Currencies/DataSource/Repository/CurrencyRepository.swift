@@ -39,4 +39,8 @@ extension DefaultCurrencyRepository: CurrencyRepository {
     func getCurrencyFromTheBase() -> [Currency] {
         return currenciesStorage.getCurrencies()
     }
+    
+    func remove(currency: Currency) {
+        currenciesStorage.remove(currency: currency)
+    }
 }

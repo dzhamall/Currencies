@@ -16,7 +16,7 @@ class CurrencyObject: Object {
     @objc dynamic var rates: String = ""
     @objc dynamic var fromRates: String = ""
     
-    //т.к. апи дает выбирать базовую валюту только евро, можно сделать ключем конвертируемую валюту(она всегда уникальна)
+    //т.к. апи дает выбирать базовую валюту только евро, можно сделать ключем конвертируемую валюту(для нашего случая она всегда уникальна)
     override static func primaryKey() -> String? {
         return "fromRates"
     }
@@ -49,5 +49,13 @@ class CurrenciesStorage {
                                               fromRates: $0.fromRates)
         }
         return currencies.reversed()
+    }
+    
+    func remove(currency: Currency) {
+        let object = realm.objects(CurrencyObject.self)
+        try! realm.write {
+            realm.delete(object.filter("fromRates == \"\(currency.fromRates)\""))
+    
+        }
     }
 }

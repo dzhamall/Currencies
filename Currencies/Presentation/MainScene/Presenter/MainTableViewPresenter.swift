@@ -61,8 +61,16 @@ final class RatesPresenter<View: ViewProtocol> where View.DataType == RatesType 
     func convert() {
         self.currentView?.updateData(data: RatesType(refreshHandling: { [weak self] data in
             guard let strongSelf = self else { return }
-            data.map { return strongSelf.fetchUpdate(model: $0 )}
-        }))
+            data.map { return strongSelf.fetchUpdate(model: $0 ) }
+            }, remove: { [weak self] item in
+                guard let strongSelf = self else { return }
+                strongSelf.currencyUseCase.remove(currency: Currency(currency: item.currency,
+                                                                     from: item.from,
+                                                                     rates: item.rates,
+                                                                     fromRates: item.fromRates))
+        })
+        
+        )
     }
     
     private func fetchUpdate(model: RatesModel) {
@@ -130,4 +138,5 @@ extension RatesPresenter: PresenterProtocol {
 struct RatesType {
     var setCurrrency: [RatesModel]?
     var refreshHandling: (([RatesModel]) -> Void)?
+    var remove: ((RatesModel) -> Void)?
 }
